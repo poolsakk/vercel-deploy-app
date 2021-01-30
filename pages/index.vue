@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <h3>{{updated_at}}</h3>
+      <p>{{dataset}}</p>
       <Logo />
       <h1 class="title">
         vercel-deploy-app
@@ -37,19 +37,17 @@ export default {
     }
   },
   created() {
-    this.onSnapshotLastPrice()
+    // this.onSnapshotLastPrice()
   },
   mounted() {
-    // this.onSnapshotLastPrice()
+    this.onSnapshotLastPrice()
   },
   methods: {
     async onSnapshotLastPrice() {
       try {
         const doc = await this.$fire.firestore.collection('scraper').doc('gold');
         await doc.onSnapshot(docSnapshot => {
-            // this.dataset = 
-            const snapshot = docSnapshot.data();
-            this.updated_at = snapshot.updated_at.toDate();
+            this.dataset = docSnapshot.data();
           }, 
           err => { 
             throw err; 
