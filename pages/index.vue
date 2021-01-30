@@ -28,7 +28,12 @@
 </template>
 
 <script>
-export default {}
+export default {
+  async mounted() {
+    const res = await this.$fire.firestore.collection('scraper').doc('gold').get();
+    console.log(res.data());
+  }
+}
 </script>
 
 <style>

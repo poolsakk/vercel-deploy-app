@@ -52,6 +52,24 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyCygBtjYjRLYqjhlvUUr6S9ENvE46H-kDU",
+          authDomain: "scraping-a8df5.firebaseapp.com",
+          databaseURL: "",
+          projectId: "scraping-a8df5",
+          storageBucket: "scraping-a8df5.appspot.com",
+          messagingSenderId: "150267838730",
+          appId: "1:150267838730:web:ffa1989f83add90402baf3",
+          measurementId: ""
+        },
+        services: { // Just as example. Can be any other service.
+          firestore: true,
+        }
+      }
+    ]
   ],
   /*
   ** Build configuration
