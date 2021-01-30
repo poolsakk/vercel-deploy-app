@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div>
+      <h3>{{updated_at}}</h3>
       <Logo />
       <h1 class="title">
         vercel-deploy-app
@@ -29,9 +30,34 @@
 
 <script>
 export default {
-  async mounted() {
-    const res = await this.$fire.firestore.collection('scraper').doc('gold').get();
-    console.log(res.data());
+  data() {
+    return {
+      dataset: {},
+      updated_at: null
+    }
+  },
+  created() {
+    this.onSnapshotLastPrice()
+  },
+  mounted() {
+    // this.onSnapshotLastPrice()
+  },
+  methods: {
+    async onSnapshotLastPrice() {
+      try {
+        const doc = await this.$fire.firestore.collection('scraper').doc('gold');
+        await doc.onSnapshot(docSnapshot => {
+            // this.dataset = 
+            const snapshot = docSnapshot.data();
+            this.updated_at = snapshot.updated_at.toDate();
+          }, 
+          err => { 
+            throw err; 
+        });
+      } catch (e) {
+        console.log(e.message);
+      }
+    }
   }
 }
 </script>
